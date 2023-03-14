@@ -1,10 +1,11 @@
 cat("\n\n##########################################################")
-  cat("\n# START: COMPLETE CHAINS OF HYBRID PARTITIONS            #")
-  cat("\n##########################################################\n\n")
+cat("\n# START: COMPLETE CHAINS OF HYBRID PARTITIONS            #")
+cat("\n##########################################################\n\n")
 
 
 ##############################################################################
-# COMPLETE CHAINS HPML                                                       #  
+# COMPLETE CHAINS HPML                                                       #
+# Internal and External Chains - clusters and labels                         #  
 # Copyright (C) 2023                                                         #
 #                                                                            #
 # This code is free software: you can redistribute it and/or modify it under #
@@ -99,12 +100,6 @@ cat("\n# START: Get arguments from command line #")
 cat("\n##########################################\n\n")
 args <- commandArgs(TRUE)
 
-
-
-###############################################################################
-# FIRST ARGUMENT: /getting specific dataset information being processed        #
-# from csv file                                                               #
-###############################################################################
 
 # config.file = "/home/biomal/Complete-Chains-HPML/config-files-0/python/jaccard/ward.D2/silho/co-pjws-GpositiveGO.csv"
 
@@ -217,10 +212,6 @@ parameters$Folders = diretorios
 #####################################
 
 
-###############################################################################
-# Copying datasets from ROOT folder on server                                 #
-###############################################################################
-
 cat("\n####################################################################")
 cat("\n# START: Checking the DATASET tar.gz file                          #")
 cat("\n####################################################################\n\n")
@@ -270,19 +261,11 @@ if(file.exists(str00)==FALSE){
   
 }
 
-
-
-###############################################################################
-# Copying PARTITIONS from ROOT folder on server                               #
-###############################################################################
-
 cat("\n####################################################################")
 cat("\n# START: Checking the PARTITIONS tar.gz file                       #")
 cat("\n####################################################################\n\n")
 str00 = paste(partitions.path, "/", ds$Name,".tar.gz", sep = "")
 str00 = str_remove(str00, pattern = " ")
-
-# /home/biomal/Best-Partitions/jaccard/ward.D2/silho
 
 if(file.exists(str00)==FALSE){
   
@@ -377,82 +360,13 @@ print(system(paste("rm -r ", diretorios$folderBestPartitions, sep="")))
 
 
 
-if(parameters$implementation == "mulan"){
+if(parameters$implementation == "python"){
   
   cat("\n####################################################################")
   cat("\n# START: COPY TO GOOGLE DRIVE                                      #")
   cat("\n####################################################################\n\n")
   origem = diretorios$folderTested
-  destino = paste("nuvem:Chains/Mulan/", similarity, "/", dataset.name, sep="")
-  comando1 = paste("rclone -P copy ", origem, " ", destino, sep="")
-  cat("\n", comando1, "\n")
-  a = print(system(comando1))
-  a = as.numeric(a)
-  if(a != 0) {
-    stop("Erro RCLONE")
-    quit("yes")
-  }
-  
-  # cat("\n############################################################")
-  # cat("\n# START: Copy to root folder                               #")
-  # cat("\n############################################################\n\n")
-  # 
-  # folderO = paste(FolderRoot, "/Output", sep="")
-  # if(dir.exists(folderO)==FALSE){dir.create(folderO)}
-  # 
-  # folderC = paste(folderO, "/Mulan", sep="")
-  # if(dir.exists(folderC)==FALSE){dir.create(folderC)}
-  # 
-  # folderS = paste(folderC, "/", similarity, sep="")
-  # if(dir.exists(folderS)==FALSE){dir.create(folderS)}
-  # 
-  # str_b <- paste("cp -r ", diretorios$folder.results, " ", 
-  #                folderS, sep = "")
-  # print(system(str_b))
-  
-  
-} else if(parameters$implementation == "utiml"){
-  
-  cat("\n####################################################################")
-  cat("\n# START: COPY TO GOOGLE DRIVE                                      #")
-  cat("\n####################################################################\n\n")
-  origem = diretorios$folderTested
-  destino = paste("nuvem:nuvem:Chains/Utiml/", similarity, "/", dataset.name, sep="")
-  comando1 = paste("rclone -P copy ", origem, " ", destino, sep="")
-  cat("\n", comando1, "\n")
-  a = print(system(comando1))
-  a = as.numeric(a)
-  if(a != 0) {
-    stop("Erro RCLONE")
-    quit("yes")
-  }
-  # 
-  # cat("\n############################################################")
-  # cat("\n# START: Copy to root folder                               #")
-  # cat("\n############################################################\n\n")
-  # 
-  # folderO = paste(FolderRoot, "/Output", sep="")
-  # if(dir.exists(folderO)==FALSE){dir.create(folderO)}
-  # 
-  # folderC = paste(folderO, "/Utiml", sep="")
-  # if(dir.exists(folderC)==FALSE){dir.create(folderC)}
-  # 
-  # folderS = paste(folderC, "/", similarity, sep="")
-  # if(dir.exists(folderS)==FALSE){dir.create(folderS)}
-  # 
-  # str_b <- paste("cp -r ", diretorios$folder.results, " ", 
-  #                folderS, sep = "")
-  # print(system(str_b))
-  
-  
-} else if(parameters$implementation == "python"){ 
-  
-  
-  cat("\n####################################################################")
-  cat("\n# START: COPY TO GOOGLE DRIVE                                      #")
-  cat("\n####################################################################\n\n")
-  origem = diretorios$folderTested
-  destino = paste("nuvem:Compllete-Chains/", 
+  destino = paste("nuvem:Complete-Chains/", 
                   parameters$implementation, "/",
                   parameters$similarity,  "/",
                   parameters$dendrogram,  "/",
@@ -484,44 +398,9 @@ if(parameters$implementation == "mulan"){
   #                folderS, sep = "")
   # print(system(str_b))
   
-  
-} else {
-  
-  
-  cat("\n####################################################################")
-  cat("\n# START: COPY TO GOOGLE DRIVE                                      #")
-  cat("\n####################################################################\n\n")
-  origem = diretorios$folderTested
-  destino = paste("nuvem:Chains/Clus/", similarity, "/", dataset.name, sep="")
-  comando1 = paste("rclone -P copy ", origem, " ", destino, sep="")
-  cat("\n", comando1, "\n")
-  a = print(system(comando1))
-  a = as.numeric(a)
-  if(a != 0) {
-    stop("Erro RCLONE")
-    quit("yes")
-  }
-  # 
-  # cat("\n############################################################")
-  # cat("\n# START: Copy to root folder                               #")
-  # cat("\n############################################################\n\n")
-  # 
-  # folderO = paste(FolderRoot, "/Output", sep="")
-  # if(dir.exists(folderO)==FALSE){dir.create(folderO)}
-  # 
-  # folderC = paste(folderO, "/Clus", sep="")
-  # if(dir.exists(folderC)==FALSE){dir.create(folderC)}
-  # 
-  # folderS = paste(folderC, "/", similarity, sep="")
-  # if(dir.exists(folderS)==FALSE){dir.create(folderS)}
-  # 
-  # str_b <- paste("cp -r ", diretorios$folder.results, " ", 
-  #                folderS, sep = "")
-  # print(system(str_b))
-  
+} else { 
   
 }
-
 
 
 cat("\n####################################################################")
@@ -534,9 +413,9 @@ rm(list = ls())
 gc()
 
 
-cat("\n\n############################################################")
-  cat("\n# START: CHAINS OF HYBRID PARTITION END                    #")
-  cat("\n############################################################")
+cat("\n\n##########################################################")
+cat("\n# START: COMPLETE CHAINS OF HYBRID PARTITION END         #")
+cat("\n##########################################################")
 cat("\n\n")
 
 
