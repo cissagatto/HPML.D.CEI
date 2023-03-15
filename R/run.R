@@ -122,6 +122,7 @@ executa <- function(parameters){
   timeCLA = system.time(resCLA <- compute.labels.attributes(parameters))
   parameters$Labels.Attr = resCLA
   
+  
   if(parameters$implementation =="python"){
     
     

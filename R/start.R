@@ -366,7 +366,7 @@ if(parameters$implementation == "python"){
   cat("\n# START: COPY TO GOOGLE DRIVE                                      #")
   cat("\n####################################################################\n\n")
   origem = diretorios$folderTested
-  destino = paste("nuvem:Complete-Chains/", 
+  destino = paste("nuvem:Complete-Chains-HPML/", 
                   parameters$implementation, "/",
                   parameters$similarity,  "/",
                   parameters$dendrogram,  "/",

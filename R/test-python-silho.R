@@ -191,7 +191,6 @@ evaluate.python <- function(parameters){
   avalParal <- foreach(f = 1:parameters$number.folds) %dopar%{
   # while(f<=parameters$number.folds){
     
-    
     cat("\n\n\n#======================================================")
     cat("\n# Fold: ", f)
     cat("\n#======================================================\n\n\n")
@@ -219,7 +218,7 @@ evaluate.python <- function(parameters){
     
     best.part.info.f = data.frame(filter(best.part.info, num.fold==f))
     all.total.labels.f = data.frame(filter(all.total.labels, num.fold==f))
-    build.datasets.f = data.frame(filter(parameters$Labels.Attr$all.info, num.fold==f))
+    # build.datasets.f = data.frame(filter(parameters$Labels.Attr$all.info, num.fold==f))
     
     # partição específica
     partition = data.frame(filter(all.partitions.info, num.fold==f))
