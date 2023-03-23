@@ -252,9 +252,10 @@ evaluate.python <- function(parameters){
                          parameters$dataset.info$LabelEnd, by=1)
     test.mldr = mldr_from_dataframe(test.dataset, labelIndices = labels.indices)
     
-    utiml.threshold <- scut_threshold(y_proba, test.mldr)
+    # utiml.threshold <- scut_threshold(y_proba, test.mldr)
+    # class(utiml.threshold)
     y_pred <- data.frame(as.matrix(fixed_threshold(y_proba, 
-                                                   utiml.threshold)))
+                                                   threshold = 0.5)))
     
     setwd(Folder.Tested.Split)
     write.csv(y_pred, "y_pred.csv", row.names = FALSE)
