@@ -26,7 +26,7 @@
 ##############################################################################
 
 
-import sys
+## ECC with internal and external chaining
 import numpy as np
 import pandas as pd
 from ecc import ECC
@@ -75,7 +75,7 @@ class ECCExin:
         predictions = pd.DataFrame([])
        #print(self.chains)
         for model in self.chains:
-            predictionsChain = pd.DataFrame(model.predict(chain_x), columns = model.labelName_ )
+            predictionsChain = pd.DataFrame(model.predict_proba(chain_x), columns = model.labelName_ )
             predictions[model.labelName_] = predictionsChain
             chain_x = pd.concat([chain_x, predictionsChain], axis=1)
         predictions = predictions[self.orderLabelsDataset]

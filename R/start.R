@@ -101,7 +101,7 @@ cat("\n##########################################\n\n")
 args <- commandArgs(TRUE)
 
 
-# config.file = "/home/biomal/Complete-Chains-HPML/config-files-0/python/jaccard/ward.D2/silho/co-pjws-GpositiveGO.csv"
+# config.file = "/home/biomal/Complete-Chains-HPML/config-files-0/python/jaccard/ward.D2/silho/"
 
 config.file <- args[1]
 

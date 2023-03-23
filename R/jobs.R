@@ -52,36 +52,36 @@ n = nrow(datasets)
 ##################################################
 # WHICH IMPLEMENTATION WILL BE USED?
 ##################################################
-Implementation.1 = c("python", "clus")
-Implementation.2 = c("p", "c")
+Implementation.1 = c("python")
+Implementation.2 = c("p")
 
 
 ######################################################
 # SIMILARITY MEASURE USED TO MODEL LABEL CORRELATIONS
 ######################################################
-Similarity.1 = c("jaccard","rogers")
-Similarity.2 = c("j", "ro")
+Similarity.1 = c("jaccard")
+Similarity.2 = c("j")
 
 
 ##################################################
 # LINKAGE METRIC USED TO BUILT THE DENDROGRAM
 ##################################################
-Dendrogram.1 = c("ward.D2", "single")
-Dendrogram.2 = c("w", "s")
+Dendrogram.1 = c("ward.D2")
+Dendrogram.2 = c("w")
 
 
 ######################################################
 # CRITERIA USED TO CHOOSE THE BEST HYBRID PARTITION
 ######################################################
-Criteria.1 = c("silho", "maf1", "mif1")
-Criteria.2 = c("s", "ma", "mi")
+Criteria.1 = c("silho")
+Criteria.2 = c("s")
 
 
 ######################################################
 FolderJobs = paste(FolderRoot, "/jobs", sep="")
 if(dir.exists(FolderJobs)==FALSE){dir.create(FolderJobs)}
 
-FolderCF = "/Complete-Chains-HPML/config-files-1"
+FolderCF = "/Complete-Chains-HPML/config-files-ufscar"
 
 
 # IMPLEMENTAÇÃO
@@ -135,12 +135,7 @@ while(p<=length(Implementation.1)){
           cat("\n\t", ds$Name)
           
           
-          name = paste("co-", 
-                       Implementation.2[p], "", 
-                       Similarity.2[s], "", 
-                       Dendrogram.2[f], "", 
-                       Criteria.2[w], "-",
-                       ds$Name, sep="")  
+          name = paste("complete-", ds$Name, sep="")  
           
           # directory name - "/scratch/eg-3s-bbc1000"
           scratch.name = paste("/tmp/", name, sep = "")
@@ -262,7 +257,7 @@ while(p<=length(Implementation.1)){
           
           write("", file = output.file, append = TRUE)
           write("echo COPYING SINGULARITY", file = output.file, append = TRUE)
-          str.30 = paste("cp /home/u704616/Experimentos-1.sif ", scratch.name, sep ="")
+          str.30 = paste("cp /home/u704616/Experimentos-3.sif ", scratch.name, sep ="")
           write(str.30 , file = output.file, append = TRUE)
           
           
@@ -336,14 +331,14 @@ while(p<=length(Implementation.1)){
           write(" ", file = output.file, append = TRUE)
           write("echo INICIANDO INSTANCIA", file = output.file, append = TRUE)
           str = paste("singularity instance start --bind ~/.config/rclone/:/root/.config/rclone ", 
-                      scratch.name, "/Experimentos-1.sif EXPCo", a, sep="")
+                      scratch.name, "/Experimentos-3.sif EXPCo", a, sep="")
           write(str, file = output.file, append = TRUE)
           
           
           write(" ", file = output.file, append = TRUE)
           write("echo EXECUTANDO", file = output.file, append = TRUE)
           str = paste("singularity run --app Rscript instance://EXPCo",
-                      a, " /Complete-Chains-HPML/R/start.R \"/Complete-Chains-HPML/config-files-1/",
+                      a, " /Complete-Chains-HPML/R/start.R \"/Complete-Chains-HPML/config-files-ufscar/",
                       Implementation.1[p], "/", Similarity.1[s], "/", 
                       Dendrogram.1[f], "/", Criteria.1[w], "/", 
                       config.file.name, "\"", sep="")
