@@ -1,5 +1,5 @@
 ##############################################################################
-# COMPLETE CHAINS HPML                                                       #  
+# Complete CHAINS HPML                                                       #
 # Copyright (C) 2023                                                         #
 #                                                                            #
 # This code is free software: you can redistribute it and/or modify it under #
@@ -10,20 +10,29 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General   #
 # Public License for more details.                                           #
 #                                                                            #
-# PhD Elaine Cecilia Gatto | Prof. PhD. Ricardo Cerri | Prof. PhD. Mauri     #
-# Ferrandin | Prof. PhD. Celine Vens | PhD. Felipe Nakano Kenji              #
+# 1 - PhD Elaine Cecilia Gatto | Prof PhD Ricardo Cerri                      #
+# 2 - Prof PhD Mauri Ferrandin                                               #
+# 3 - Prof PhD Celine Vens | PhD Felipe Nakano Kenji                         #
+# 4 - Prof PhD Jesse Read                                                    #
 #                                                                            #
-# Federal University of São Carlos - UFSCar - https://www2.ufscar.br         #
-# Campus São Carlos - Computer Department - DC - https://site.dc.ufscar.br   #
+# 1 = Federal University of São Carlos - UFSCar - https://www2.ufscar.br     #
+# Campus São Carlos | Computer Department - DC - https://site.dc.ufscar.br | #
 # Post Graduate Program in Computer Science - PPGCC                          # 
-# http://ppgcc.dc.ufscar.br - Bioinformatics and Machine Learning Group      #
-# BIOMAL - http://www.biomal.ufscar.br                                       #
+# http://ppgcc.dc.ufscar.br | Bioinformatics and Machine Learning Group      #
+# BIOMAL - http://www.biomal.ufscar.br                                       # 
 #                                                                            #
-# Katholieke Universiteit Leuven Campus Kulak Kortrijk Belgium               #
+# 2 - Federal University of Santa Catarina Campus Blumenau - UFSC            #
+# https://ufsc.br/                                                           #
+#                                                                            #
+# 3 - Katholieke Universiteit Leuven Campus Kulak Kortrijk Belgium           #
 # Medicine Department - https://kulak.kuleuven.be/                           #
 # https://kulak.kuleuven.be/nl/over_kulak/faculteiten/geneeskunde            #
 #                                                                            #
+# 4 - Ecole Polytechnique | Institut Polytechnique de Paris | 1 rue Honoré   #
+# d’Estienne d’Orves - 91120 - Palaiseau - FRANCE                            #
+#                                                                            #
 ##############################################################################
+
 
 
 ###########################################################################
@@ -59,7 +68,7 @@ executa <- function(parameters){
   
   
   ##########################################################################
-  if(parameters$number.cores == 0){
+  if(parameters$Config$Number.Cores == 0){
     
     cat("\n\n############################################################")
     cat("\n# RUN: Zero is a disallowed value for number_cores. Please #")
@@ -68,17 +77,17 @@ executa <- function(parameters){
     
   } else {
     
-    cl <- parallel::makeCluster(parameters$number.cores)
+    cl <- parallel::makeCluster(parameters$Config$Number.Cores)
     doParallel::registerDoParallel(cl)
     print(cl)
     
-    if(parameters$number.cores==1){
+    if(parameters$Config$Number.Cores==1){
       cat("\n\n########################################################")
       cat("\n# RUN: Running Sequentially!                           #")
       cat("\n########################################################\n\n")
     } else {
       cat("\n\n######################################################################")
-      cat("\n# RUN: Running in parallel with ", parameters$number.cores, " cores! #")
+      cat("\n# RUN: Running in parallel with ", parameters$Config$Number.Cores, " cores! #")
       cat("\n######################################################################\n\n")
     }
   }
@@ -91,7 +100,7 @@ executa <- function(parameters){
   cat("\n# RUN: Get labels                                      #")
   cat("\n########################################################\n\n")
   arquivo = paste(parameters$Folders$folderNamesLabels, "/" ,
-                  dataset.name, "-NamesLabels.csv", sep="")
+                  parameters$Config$Dataset.Name, "-NamesLabels.csv", sep="")
   namesLabels = data.frame(read.csv(arquivo))
   colnames(namesLabels) = c("id", "labels")
   namesLabels = c(namesLabels$labels)
@@ -123,7 +132,7 @@ executa <- function(parameters){
   parameters$Labels.Attr = resCLA
   
   
-  if(parameters$implementation =="python"){
+  if(parameters$Config$Implementation =="python"){
     
     
     setwd(FolderScripts)
@@ -150,7 +159,7 @@ executa <- function(parameters){
     cat("\n\n############################################")
     cat("\n# RUN: PYTHON Gather Evaluation              #")
     cat("\n##############################################\n\n")
-    timeGather = system.time(resGE <- gather.evaluated.python(parameters))
+    timeGather = system.time(resGE <- gather.eval.python.silho(parameters))
     
     
     cat("\n\n############################################")

@@ -78,7 +78,7 @@ Criteria.2 = c("s")
 
 
 ######################################################
-FolderCF = paste(FolderRoot, "/config-files-laptop", sep="")
+FolderCF = paste(FolderRoot, "/config-files-apptainer", sep="")
 if(dir.exists(FolderCF)==FALSE){dir.create(FolderCF)}
 
 # IMPLEMENTAÇÃO
@@ -134,27 +134,26 @@ while(p<=length(Implementation.1)){
           # write("Dataset_Path, /home/u704616/Datasets", 
           #      file = output.file, append = TRUE)
           
-          # write("Dataset_Path, /Datasets", 
-          #    file = output.file, append = TRUE)
+           write("Dataset_Path, /Datasets", 
+              file = output.file, append = TRUE)
           
           # write("Dataset_Path, /home/elaine/Datasets", 
           #   file = output.file, append = TRUE)
           
-           write("Dataset_Path, /home/biomal/Datasets", 
-               file = output.file, append = TRUE)
+          # write("Dataset_Path, /home/biomal/Datasets", 
+          #     file = output.file, append = TRUE)
           
-           folder.name = paste("/dev/shm/", name, sep = "")
+          # folder.name = paste("/dev/shm/", name, sep = "")
           # folder.name = paste("/scratch", name, sep = "")
-          # folder.name = paste("/tmp/", name, sep = "")
+           folder.name = paste("/tmp/", name, sep = "")
           
           str1 = paste("Temporary_Path, ", folder.name, sep="")
           write(str1,file = output.file, append = TRUE)
           
-          # /home/biomal
-          # str.1 = paste("/2-Best-Partitions/HPML.A/",
-          #             Similarity.1[s], "/",
-          #             Dendrogram.1[f], "/",
-          #            Criteria.1[w], sep="")
+           str.1 = paste("/2-Best-Partitions/HPML.A/",
+                       Similarity.1[s], "/",
+                       Dendrogram.1[f], "/",
+                      Criteria.1[w], sep="")
           
            # str.1 = paste("/home/elaine/2-Best-Partitions/HPML.A/", 
            #              Similarity.1[s], "/",
@@ -166,10 +165,10 @@ while(p<=length(Implementation.1)){
           #              Dendrogram.1[f], "/", 
           #              Criteria.1[w], sep="")
           
-          str.1 = paste("/home/biomal/2-Best-Partitions/HPML.A/",
-                         Similarity.1[s], "/",
-                         Dendrogram.1[f], "/",
-                         Criteria.1[w], sep="")
+          # str.1 = paste("/home/biomal/2-Best-Partitions/HPML.A/",
+          #                Similarity.1[s], "/",
+          #               Dendrogram.1[f], "/",
+          #               Criteria.1[w], sep="")
           
           str.2 = paste("Partitions_Path, ", str.1,  sep="")
           write(str.2, file = output.file, append = TRUE)
