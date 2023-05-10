@@ -273,8 +273,30 @@ if(parameters$Config$Implementation =="clus"){
   setwd(parameters$Folders$folderTested)
   write.csv(result_set, "Final-Runtime.csv")
   
-  print(system(paste("rm -r ", diretorios$folderDatasets, sep="")))
-  print(system(paste("rm -r ", diretorios$folderPartitions, sep="")))
+  print(system(paste("rm -r ", parameters$Folders$folderDatasets, sep="")))
+  print(system(paste("rm -r ", parameters$Folders$folderBestPartitions, sep="")))
+  
+  cat("\n\n###################################################################")
+  cat("\n# COMPLETE: COMPRESS RESULTS                                      #")
+  cat("\n#####################################################################\n\n")
+  str3 = paste("tar -zcvf ", parameters$Folders$folderTested, "/",
+               parameters$DatasetInfo$Name, "-results-complete.tar.gz ",
+               parameters$Folders$folderTested, sep="")
+  print(system(str3))
+  
+  
+  # cat("\n\n###################################################################")
+  # cat("\n# ====> : COPY TO HOME                                     #")
+  # cat("\n#####################################################################\n\n")
+  # 
+  # str0 = "~/Complete-Chains-HPML/Reports/"
+  # if(dir.exists(str0)==FALSE){dir.create(str0)}
+  # 
+  # str3 = paste(parameters$Folders$folderTested, "/",
+  #              parameters$DatasetInfo$Name, "-results-complete.tar.gz", sep="")
+  # 
+  # str4 = paste("cp ", str3, " ", str0, sep="")
+  # print(system(str4))
   
   
   cat("\n\nCOPY TO GOOGLE DRIVE")
