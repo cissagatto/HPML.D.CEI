@@ -70,7 +70,9 @@ To run this experiment you need the _X-Fold Cross-Validation_ files and they mus
 You will need the previously best chosen partitions by one of the following codes:
 
 https://github.com/cissagatto/Best-Partition-Silhouette
+
 https://github.com/cissagatto/Best-Partition-MaF1
+
 https://github.com/cissagatto/Best-Partition-MiF1
 
 
